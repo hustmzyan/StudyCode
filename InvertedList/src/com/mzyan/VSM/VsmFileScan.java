@@ -38,7 +38,12 @@ public class VsmFileScan {
             for(int i = 0; i < filelist.length; i++){
                 System.out.print("扫描进度:" +(float)(i+1)/filelist.length * 100 + "%");
                 Integer docid = Integer.valueOf(filelist[i].split("\\.")[0]);
-                buildInvertedList(text2Words(readFile(filepath + "/" + filelist[i])), docid);
+                if(filepath.contains((CharSequence)"\\")) {
+                    buildInvertedList(text2Word(readFile(filepath + "\\" + filelist[i])), docid);
+                }
+                else {
+                    buildInvertedList(text2Word(readFile(filepath + "/" + filelist[i])), docid);
+                }
 
                 for (int j = 0; j <= String.valueOf((float)(i+1)/filelist.length * 100).length()+7; j++) {
                     System.out.print("\b");
